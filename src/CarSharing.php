@@ -2,6 +2,8 @@
 
 namespace MaximYugov\CarSharing;
 
+use MaximYugov\CarSharing\Rates\AbstractRate;
+
 class CarSharing
 {
     public function __construct()
@@ -12,39 +14,41 @@ class CarSharing
     {
         $additionalServiceCost = 0;
 
-        $rateClass = ucfirst($input['rate']) . 'Rate';
+        $rateClass = 'MaximYugov\\CarSharing\\Rates\\' . ucfirst($input['rate']) . 'Rate';
 
         if (!class_exists($rateClass)) {
-            throw new Exception('Тарифа не существует');
+            throw new \Exception('Тарифа не существует');
         }
 
         $rate = new $rateClass();
 
         if (!$rate->isAvailable($input)) {
-            throw new Exception('Тариф недоступен');
+            throw new \Exception('Тариф недоступен');
         }
 
         $rateCost = $rate->getCost($input);
 
         foreach ($input['additionalServices'] as $additionalServiceName) {
-            $additionalServiceCost += $this->getAdditionalServiceCost($additionalServiceName, $input);
+//            if ($additionalServiceName !== '') {
+                $additionalServiceCost += $this->getAdditionalServiceCost($additionalServiceName, $input, $rate);
+//            }
         }
 
         return floatval($rateCost + $additionalServiceCost);
     }
 
-    protected function getAdditionalServiceCost(string $additionalServiceName, array $input): float
+    protected function getAdditionalServiceCost(string $additionalServiceName, array $input, AbstractRate $rate): float
     {
-        $additionalServiceClass = ucfirst($additionalServiceName) . 'Service';
+        $additionalServiceClass = 'MaximYugov\\CarSharing\\AdditionalServices\\' . ucfirst($additionalServiceName) . 'Service';
 
         if (!class_exists($additionalServiceClass)) {
-            throw new Exception('Услуги не существует');
+            throw new \Exception('Услуги не существует');
         }
 
         $additionalService = new $additionalServiceClass();
 
-        if (!$additionalService->isAvailable) {
-            throw new Exception('Услуга недоступна на выбранном тарифе');
+        if (!$additionalService->isAvailable($rate)) {
+            throw new \Exception('Услуга недоступна на выбранном тарифе');
         }
 
         return floatval($additionalService->getCost($input));
