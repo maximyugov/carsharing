@@ -1,0 +1,15 @@
+{
+    "name": "maximyugov/carsharing",
+    "autoload": {
+        "psr-4": {
+            "MaximYugov\\CarSharing\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Maxim Yugov",
+            "email": "maxim.s.yugov@gmail.com"
+        }
+    ],
+    "require": {}
+}
