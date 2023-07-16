@@ -2,7 +2,7 @@
 
 namespace MaximYugov\CarSharing\Rates;
 
-class BasicRate extends AbstractRate
+class BaseRate extends AbstractRate
 {
     protected int $kmRate = 10;
     protected int $minutesRate = 3;

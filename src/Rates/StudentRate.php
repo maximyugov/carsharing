@@ -15,7 +15,7 @@ class StudentRate extends AbstractRate
 
     public function isAvailabe(array $input): bool
     {
-        if ($input['driverAge'] > $this->maxAge) {
+        if ($input['driverAge'] >= $this->maxAge) {
             return false;
         }
 
