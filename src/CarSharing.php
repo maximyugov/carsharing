@@ -8,7 +8,7 @@ class CarSharing
     {
     }
 
-    public function getTotalCost(array $input): array
+    public function getTotalCost(array $input): float
     {
         $additionalServiceCost = 0;
 
@@ -30,7 +30,7 @@ class CarSharing
             $additionalServiceCost += $this->getAdditionalServiceCost($additionalServiceName, $input);
         }
 
-        return $rateCost + $additionalServiceCost;
+        return floatval($rateCost + $additionalServiceCost);
     }
 
     protected function getAdditionalServiceCost(string $additionalServiceName, array $input): float
