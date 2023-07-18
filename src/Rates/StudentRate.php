@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MaximYugov\CarSharing\Rates;
 
 class StudentRate extends AbstractRate
 {
     protected int $kmRate = 4;
     protected int $minutesRate = 1;
-    protected int $maxAge = 25;
+    protected int $maxAge = 24;
 
     public function getCost(array $input): float
     {
@@ -15,7 +17,7 @@ class StudentRate extends AbstractRate
 
     public function isAvailabe(array $input): bool
     {
-        if ($input['driverAge'] >= $this->maxAge) {
+        if ($input['driverAge'] > $this->maxAge) {
             return false;
         }
 

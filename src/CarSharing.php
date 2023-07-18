@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MaximYugov\CarSharing;
 
 use MaximYugov\CarSharing\Rates\AbstractRate;
@@ -29,9 +31,7 @@ class CarSharing
         $rateCost = $rate->getCost($input);
 
         foreach ($input['additionalServices'] as $additionalServiceName) {
-//            if ($additionalServiceName !== '') {
                 $additionalServiceCost += $this->getAdditionalServiceCost($additionalServiceName, $input, $rate);
-//            }
         }
 
         return floatval($rateCost + $additionalServiceCost);

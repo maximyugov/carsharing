@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MaximYugov\CarSharing\AdditionalServices;
 
 use MaximYugov\CarSharing\Rates\AbstractRate;
