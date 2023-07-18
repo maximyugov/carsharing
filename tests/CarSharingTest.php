@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class CarSharingTest extends TestCase
 {
     public CarSharing $rate;
-    
+
     public $input = [
             'rate' => 'base',
             'km' => 15.5,
@@ -21,9 +21,7 @@ class CarSharingTest extends TestCase
     {
         $this->rate = new CarSharing();
     }
-    /**
-     * @test
-     */
+
     public function test_can_get_cost_for_base_rate_without_additional_services()
     {
         $this->assertEquals(245.3, $this->rate->getTotalCost($this->input));
